@@ -128,17 +128,6 @@
   }
   .card h3 { font-size: 26px; color: var(--gold); margin-bottom: 8px; }
   .card p:last-child { margin-bottom: 0; }
-  .photo {
-    margin: 0 0 16px; border-radius: 14px; overflow: hidden;
-    background: rgba(255, 255, 255, .05); display: grid; place-items: center;
-  }
-  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .photo.empty {
-    border: 1.5px dashed rgba(255, 255, 255, .35);
-    font-family: var(--ui); font-size: 14px; color: var(--muted); text-align: center; padding: 10px;
-  }
-  .photo.portrait { aspect-ratio: 4 / 5; }
-  .photo.portrait img { object-position: center 25%; }
 
   .rag-box { text-align: center; margin-top: 14px; }
   .rag {
@@ -161,38 +150,13 @@
   .rag-line { min-height: 2em; font-size: 20px; margin: 10px 0 0; }
   .link { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 14px; color: var(--muted); text-decoration: underline; }
 
-  /* ৪. চিঠি */
-  .letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
-  .env {
-    position: relative; border-radius: 12px; padding: 38px 6px 12px; text-align: center;
-    font-family: var(--ui); font-size: 14px; line-height: 1.4;
-    background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .16); color: var(--muted);
-    overflow: hidden;
-  }
-  .env::before {
-    content: ''; position: absolute; left: 50%; top: -30px; width: 48px; height: 48px;
-    border: 1px solid rgba(255, 255, 255, .22); transform: translateX(-50%) rotate(45deg);
-  }
-  .env b { display: block; font-weight: 600; color: var(--ink); }
-  .env.open { background: rgba(242, 200, 121, .16); border-color: var(--gold); color: var(--gold); }
-  .env.open::before { border-color: var(--gold); }
-  .env.nope { animation: nope .35s; }
-  @keyframes nope { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-  .letter {
-    margin-top: 20px; background: var(--paper); color: var(--paper-ink);
-    border-radius: 16px; padding: 24px; white-space: pre-line; display: none;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, .3);
-  }
-  .letter.show { display: block; }
-  .letter.locked { background: rgba(255, 255, 255, .08); color: var(--ink); box-shadow: none; font-family: var(--ui); font-size: 15px; }
-
-  /* ৫. আমার কথা */
+  /* ৪. আমার কথা */
   .promise {
     background: var(--paper); color: var(--paper-ink); white-space: pre-line;
     border-radius: 18px; padding: 28px 24px; box-shadow: 0 16px 44px rgba(0, 0, 0, .3);
   }
 
-  /* ৬. শেষ প্রশ্ন */
+  /* ৫. শেষ প্রশ্ন */
   .final { background: linear-gradient(180deg, rgba(217, 138, 120, 0), #f3b48c 45%, #fbe6cf); }
   .final .wrap { padding-bottom: 110px; }
   .paper {
@@ -200,29 +164,27 @@
     border-radius: 22px; padding: 30px 24px 34px; text-align: center;
     box-shadow: 0 20px 50px rgba(60, 20, 40, .25);
   }
-  .paper h2 { font-size: clamp(26px, 6.6vw, 34px); margin: 6px 0 26px; }
-  .polaroids { display: flex; justify-content: center; gap: 14px; margin-bottom: 26px; }
-  .polaroids .photo {
-    width: 44%; aspect-ratio: 3 / 4; margin: 0; border-radius: 4px; background: #fff;
-    border: 8px solid #fff; border-bottom-width: 26px; box-shadow: 0 8px 22px rgba(60, 20, 40, .22);
-  }
-  .polaroids .photo:first-child { transform: rotate(-4deg); }
-  .polaroids .photo:last-child { transform: rotate(3deg); }
-  .polaroids .photo.empty { border-style: solid; border-color: #fff; background: #efe3d0; color: #7a6a70; }
-  .hold {
-    --p: 0; position: relative; width: 168px; height: 168px; border-radius: 50%; border: 0;
-    background: conic-gradient(var(--rose) calc(var(--p) * 1turn), #ead9c6 0);
-    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  .paper h2 { font-size: clamp(22px, 5.8vw, 29px); line-height: 1.6; margin: 6px 0 20px; white-space: pre-line; }
+  .paper h2.swap { animation: rise .6s ease both; }
+  /* "না" এই বাক্সের ভেতরেই পালায় */
+  .choices { position: relative; height: 180px; }
+  .choice {
+    position: absolute; top: 14px; width: 104px; padding: 11px 0; border: 0; border-radius: 30px;
+    font-family: var(--ui); font-size: 17px; font-weight: 600;
     -webkit-tap-highlight-color: transparent;
   }
-  .hold::before { content: ''; position: absolute; inset: 9px; border-radius: 50%; background: var(--paper); }
-  .hold span {
-    position: relative; display: block; padding: 0 26px;
-    font-family: var(--ui); font-size: 16px; font-weight: 600; line-height: 1.45; color: var(--paper-ink);
+  .choice.yes {
+    left: calc(50% - 110px); z-index: 2; background: var(--rose); color: #fff;
+    box-shadow: 0 6px 16px rgba(233, 138, 138, .45);
   }
-  .hold.done { background: var(--rose); }
-  .hold.done::before { background: var(--rose); }
-  .hold.done span { color: #fff; font-size: 30px; }
+  .choice.no {
+    left: calc(50% + 6px); background: #ead9c6; color: var(--paper-ink);
+    transition: left .18s, top .18s; touch-action: none;
+  }
+  .choices.done { height: 76px; }
+  .choices.done .no { display: none; }
+  .choices.done .yes { left: calc(50% - 52px); }
+  .paper .note { min-height: 1.7em; margin: 0; color: #7a6a70; }
   .answer { display: none; margin-top: 26px; font-size: 21px; }
   .answer.show { display: block; animation: rise .9s ease both; }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
@@ -232,11 +194,6 @@
     animation: fly 1.6s ease-out forwards;
   }
   @keyframes fly { to { transform: translate(var(--dx), var(--dy)) rotate(var(--r)); opacity: 0; } }
-
-  .preview-flag {
-    position: fixed; z-index: 5; left: 10px; bottom: 10px; padding: 4px 10px; border-radius: 20px;
-    background: #2c2333; color: #fff; font-family: var(--ui); font-size: 12px;
-  }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
@@ -255,17 +212,17 @@
     <div class="skies">
       <div class="sky" id="skyMe">
         <div class="orb"></div><div class="ground"></div>
-        <p class="tag"><span class="who">আমার আকাশ</span><span class="where"></span><span class="time"></span></p>
+        <p class="tag"><span class="who">আমার আকাশ</span><span class="time"></span></p>
       </div>
       <div class="sky" id="skyHer">
         <div class="orb"></div><div class="ground"></div>
-        <p class="tag"><span class="who">তোমার আকাশ</span><span class="where"></span><span class="time"></span></p>
+        <p class="tag"><span class="who">তোমার আকাশ</span><span class="time"></span></p>
       </div>
     </div>
     <div class="hero-text">
       <h1 id="herName"></h1>
       <p id="heroLine"></p>
-      <p class="scroll-hint">নিচে নামো ↓</p>
+      <p class="scroll-hint">নিচে scroll করো ↓</p>
     </div>
   </section>
 
@@ -274,7 +231,7 @@
     <div class="wrap reveal">
       <p class="eyebrow">যেখান থেকে শুরু</p>
       <h2 id="calTitle"></h2>
-      <p>এই মাসের দুইটা তারিখ আমি ভুলব না। দুইটাতেই টোকা দাও।</p>
+      <p>এই মাসের দুইটা তারিখ আমি ভুলব না। দুইটাতেই click করো।</p>
       <div class="cal" id="cal"></div>
       <p class="cal-note" id="calNote"></p>
       <p class="note" id="sinceLabel"></p>
@@ -294,13 +251,11 @@
       <h2 class="reveal">তোমার যা যা আমার প্রিয়</h2>
 
       <div class="card reveal">
-        <figure class="photo portrait" data-src="photos/1.jpg" data-label="ছবি ১"></figure>
         <h3>চোখ</h3>
         <p>তোমার চোখ আমার অনেক প্রিয়। কেন, গুছিয়ে বলতে পারি না। প্রিয়, ব্যস।</p>
       </div>
 
       <div class="card reveal">
-        <figure class="photo portrait" data-src="photos/2.jpg" data-label="ছবি ২"></figure>
         <h3>হাসি</h3>
         <p>তুমি হাসলে আমার ভালো লাগে। এর বেশি কিছু বলার নেই।</p>
       </div>
@@ -309,7 +264,7 @@
         <h3 id="ragTitle">রাগ</h3>
         <p id="ragText">অল্পতেই রেগে যাও। তখন তোমাকে একদম বাচ্চাদের মতো লাগে, আর আমার সেটাও ভালো লাগে।</p>
         <div class="rag-box">
-          <button class="rag" id="rag" aria-label="রাগ ভাঙাতে টোকা দাও">
+          <button class="rag" id="rag" aria-label="রাগ ভাঙাতে click করো">
             <svg viewBox="0 0 100 100" aria-hidden="true">
               <g id="ragFace">
                 <circle id="ragSkin" cx="50" cy="52" r="38" fill="#e5484d"/>
@@ -324,25 +279,14 @@
           </button>
           <div class="meter"><i id="ragBar"></i></div>
           <p class="note" id="ragLevel"></p>
-          <p class="rag-line" id="ragLine">রাগ ভাঙাতে মুখটায় টোকা দাও</p>
+          <p class="rag-line" id="ragLine">রাগ ভাঙাতে মুখটায় click করো</p>
           <button class="link" id="ragAgain" hidden>আবার রেগে যাও</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ৪. সামনের ১৬ তারিখগুলো -->
-  <section>
-    <div class="wrap reveal">
-      <p class="eyebrow">সামনে যা আসছে</p>
-      <h2>সামনের ১৬ তারিখগুলো</h2>
-      <p>প্রতি মাসের ১৬ তারিখে এখানে একটা করে চিঠি খুলবে। আগে খোলা যাবে না। চেষ্টা করে দেখতে পারো।</p>
-      <div class="letters" id="letters"></div>
-      <div class="letter" id="letter"></div>
-    </div>
-  </section>
-
-  <!-- ৫. আমার কথা -->
+  <!-- ৪. আমার কথা -->
   <section>
     <div class="wrap reveal">
       <p class="eyebrow">আমার দিক থেকে</p>
@@ -351,17 +295,16 @@
     </div>
   </section>
 
-  <!-- ৬. শেষ প্রশ্ন -->
+  <!-- ৫. শেষ প্রশ্ন -->
   <section class="final">
     <div class="wrap reveal">
       <div class="paper">
-        <div class="polaroids">
-          <figure class="photo" data-src="photos/3.jpg" data-label="ছবি ৩"></figure>
-          <figure class="photo" data-src="photos/4.jpg" data-label="ছবি ৪" data-optional></figure>
-        </div>
-        <p>১৬ সেপ্টেম্বর একবার জিজ্ঞেস করেছিলাম। আজ আবার করছি।</p>
         <h2 id="question"></h2>
-        <button class="hold" id="hold"><span id="holdLabel">হ্যাঁ হলে চেপে ধরে রাখো</span></button>
+        <div class="choices" id="choices">
+          <button class="choice yes" id="yes">হ্যাঁ</button>
+          <button class="choice no" id="no">না</button>
+        </div>
+        <p class="note" id="noLine"></p>
         <div class="burst" id="burst" aria-hidden="true"></div>
         <div class="answer" id="answer"></div>
       </div>
@@ -375,39 +318,65 @@
 const CONFIG = {
   herName: 'Taskiya',
   myName: 'Riyad',
-  me:  { city: 'বুরাইদাহ', tz: 'Asia/Riyadh' },
-  her: { city: 'টরন্টো',  tz: 'America/Toronto' },
+  me:  { tz: 'Asia/Riyadh' },
+  her: { tz: 'America/Toronto' },
   met:      { y: 2026, m: 9, d: 1,  note: 'Facebook এ তোমার সাথে প্রথম কথা।' },
   together: { y: 2026, m: 9, d: 16, note: 'সেদিন তোমাকে বলে ফেললাম। সেদিন থেকে আমরা।' },
 };
 
-// চিঠি: ১ = ১৬ অক্টোবর ২০২৬, ২ = ১৬ নভেম্বর ... ১২ = ১৬ সেপ্টেম্বর ২০২৭
-const LETTERS = {
-  1: `Taskiya,
-
-আজ এক মাস। ১৬ সেপ্টেম্বর তোমাকে বলার আগে অনেকবার ভেবেছিলাম। এখন মনে হয় আরও আগে বললেই হতো।
-
-তোমার চোখ এখনো আমার সবচেয়ে প্রিয়। রাগটাও।`,
-};
 // মূল চিঠি, শেষ প্রশ্নের ঠিক আগে দেখায়
 const PROMISE = `Taskiya,
 
-আমি Buraydah তে, তুমি Canada তে। মাঝখানে অনেক পথ, ঘড়িও আলাদা। তবু ১৬ সেপ্টেম্বরের পর থেকে আমার দিন শুরু হয় তোমার খবর নিয়ে।
+সাদাত হোসাইনের একটা কবিতা এভাবে শুরু হয়:
 
-সামনে কী হবে তার সবটা আমি জানি না। যেটুকু আমার হাতে, সেটুকু লিখে দিচ্ছি।
+"শোনো
+কাজল চোখের মেয়ে
+আমার দিবস কাটে, বিবশ হয়ে
+তোমার চোখে চেয়ে।"
 
-আমি তোমার প্রতি সৎ থাকব। তুমি পাশে না থাকলেও, কেউ না দেখলেও। আমার জীবনে তোমার জায়গায় আর কেউ আসবে না।
+মনে হয় আমার কথাটা কেউ আমার আগেই লিখে ফেলেছে। তোমার চোখ দেখলে আমার আর কিছু মনে থাকে না।
 
-তোমাকে সম্মান করব। তোমার পরিবার আর তোমার নিজের সিদ্ধান্ত, দুটোকেই। তুমি রাগ করলে আগে শুনব, তারপর বলব।
+১ সেপ্টেম্বর Facebook এ তোমার সাথে প্রথম কথা। তখন জানতাম না পনেরো দিন পর কী বলে বসব। ওঁর "নির্বাসন" উপন্যাসে একটা লাইন আছে: "ঘৃণা লুকিয়ে রাখা যায়, ভালোবাসা লুকিয়ে রাখা যায় না।" আমিও পারিনি। ১৬ তারিখে বলে ফেললাম।
 
-এই দূরত্ব সারাজীবনের জন্য রাখতে চাই না। একদিন আমরা একই শহরে, একই ঘড়িতে থাকব। আমি সেই দিনের জন্য কাজ করছি। তারপর তোমার পরিবারের সামনে গিয়ে সম্মানের সাথে তোমাকে চাইব।
+আমি Buraydah তে, তুমি Toronto তে। আমার এখানে যখন মাঝরাত, তোমার ওখানে তখন বিকেল। তবু সারাদিন মাথায় তুমিই থাকো। "যতদূর চোখ যায়, যতদূর যায় না, সবখানে অদ্ভুত, তুমিময় আয়না!" আমার অবস্থা এখন এটাই। এটা একটা অসুখ। সারাতে চাই না।
+
+তুমি খুব তাড়াতাড়ি রেগে যাও, একদম বাচ্চাদের মতো। আমার ওটাও ভালো লাগে। রাগের নিচে যে নরম মনটা আছে, আমি ওটা চিনি। তারপর তুমি হাসো। তখন আমার আর কিছু চাওয়ার থাকে না।
+
+এবার স্বপ্নের কথা বলি। তোমাকে নিয়ে আমার অনেক স্বপ্ন। গুনে শেষ করতে পারব না, কয়েকটা লিখি।
+
+একদিন আমাদের দুজনের ঘড়িতে একই সময় বাজবে। ঘুম ভেঙে আর হিসাব করতে হবে না, তোমার ওখানে এখন কয়টা।
+
+একদিন মাঝখানে phone এর screen থাকবে না। সামনে বসে তোমার চোখ দেখব। তুমি রাগ করবে, আমি সামনে বসেই রাগ ভাঙাব।
+
+একটা ঘরের স্বপ্ন দেখি। খুব বড় না। সকালে ঘুম ভাঙলে প্রথমে তোমার মুখটা দেখব, এইটুকু হলেই চলবে।
+
+তোমার পাশে হাঁটার স্বপ্ন দেখি। কোন শহরের রাস্তা, সেটা নিয়ে আমার মাথাব্যথা নেই। তুমি পাশে থাকলেই হলো।
+
+আর স্বপ্ন দেখি অনেক বছর পরের কোনো এক ১৬ সেপ্টেম্বর। দুজনেরই চুল পেকে গেছে। তুমি তখনো ছোট কথায় রেগে যাচ্ছ, আমি তখনো sorry বলছি।
+
+এই দিনগুলো আনার জন্য আমি কাজ করছি। এটুকু কথা দিচ্ছি।
+
+"ভালো আছি, ভালো থেকো, আকাশের ঠিকানায় চিঠি লিখো।" আমাদের আকাশ দুটো। এই চিঠিটা তোমার আকাশের ঠিকানায় লিখলাম।
 
 আর ভালোবাসা। ওটা প্রতিদিন দেব, ১৬ তারিখ হোক বা না হোক।
 
 তোমার Riyad`;
-const LETTER_EMPTY ='এই চিঠিটা লিখছি। একটু পরে আবার এসো।';
 
-const RAG_LINES = ['আচ্ছা, সরি।', 'ভুলটা আমারই ছিল।', 'একটু তাকাও এদিকে।', 'এই তো, হাসি আসছে।'];
+const RAG_LINES = ['আচ্ছা, sorry।', 'ভুলটা আমারই ছিল।', 'একটু তাকাও এদিকে।', 'এই তো, হাসি আসছে।'];
+
+// শেষের দুই প্রশ্ন, একটার পর একটা আসে
+const QUESTIONS = [
+  `দুই আকাশের এই দূরত্ব
+পেরিয়ে আসব আমি।
+সেই দিনটার অপেক্ষায়
+থাকবে তো তুমি?`,
+  `সারাটা জীবন, শেষ বেলা অবধি,
+আমার হাতে হাত রেখে,
+কাটিয়ে দেবে তো, Taskiya,
+আমারই পাশে থেকে?`,
+];
+// "না" ধরতে গেলে যা দেখায়
+const NO_LINES = ['না টা ধরা যাবে না।', 'আবার চেষ্টা করো।', 'ওটা পালাতেই থাকবে।', 'হ্যাঁ টা কিন্তু এক জায়গাতেই আছে।'];
 // --------------------------------
 
 const $ = s => document.querySelector(s);
@@ -415,7 +384,6 @@ const bn = s => String(s).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d
 const pad = n => String(n).padStart(2, '0');
 const MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
 const DAYS = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
-const PREVIEW = new URLSearchParams(location.search).has('preview');
 
 function tzParts(tz, d = new Date()) {
   const o = {};
@@ -462,7 +430,6 @@ function paintSky(el, place) {
   orb.style.left = 12 + arc * 76 + '%';
   orb.style.top = 58 - Math.sin(Math.PI * arc) * 44 + '%';
 
-  el.querySelector('.where').textContent = place.city;
   el.querySelector('.time').textContent = clock(o);
   return o;
 }
@@ -474,7 +441,7 @@ function hero() {
   const gapText = bn(Math.floor(gap / 60)) + ' ঘণ্টা' + (gap % 60 ? ' ' + bn(gap % 60) + ' মিনিট' : '');
   $('#heroLine').textContent =
     `তোমার ঘড়িতে এখন ${clock(her)}, আমার ঘড়িতে ${clock(me)}।` +
-    (gap ? ` মাঝখানে ${gapText}।` : '') + ' এই পাতাটা তোমার জন্য বানিয়েছি।';
+    (gap ? ` মাঝখানে ${gapText}।` : '') + ' এই page টা তোমার জন্য বানিয়েছি।';
 }
 $('#herName').textContent = CONFIG.herName + ',';
 hero();
@@ -532,19 +499,6 @@ function count() {
 count();
 setInterval(count, 1000);
 
-// ---- ছবি ----
-document.querySelectorAll('.photo').forEach(f => {
-  const img = new Image();
-  img.alt = '';
-  img.onload = () => f.appendChild(img);
-  img.onerror = () => {
-    if ('optional' in f.dataset) return f.remove();
-    f.classList.add('empty');
-    f.innerHTML = `<span>${f.dataset.label}<br>${f.dataset.src}</span>`;
-  };
-  img.src = f.dataset.src;
-});
-
 // ---- ৩. রাগ ----
 const rag = $('#rag');
 let anger = RAG_LINES.length + 1;
@@ -572,78 +526,67 @@ rag.addEventListener('click', () => {
 });
 $('#ragAgain').addEventListener('click', () => {
   anger = RAG_LINES.length + 1;
-  $('#ragLine').textContent = 'রাগ ভাঙাতে মুখটায় টোকা দাও';
+  $('#ragLine').textContent = 'রাগ ভাঙাতে মুখটায় click করো';
   drawRag();
 });
 drawRag();
 
-// ---- ৪. চিঠি ----
-const today = tzParts(CONFIG.her.tz);
-const todayUTC = Date.UTC(today.year, today.month - 1, today.day);
-const letterBox = $('#letter');
-let nextLetter = null;
-for (let n = 1; n <= 12; n++) {
-  const mi = together.m - 1 + n;
-  const y = together.y + Math.floor(mi / 12), m = mi % 12;
-  const left = Math.round((Date.UTC(y, m, together.d) - todayUTC) / 86400000);
-  const dateText = `${bn(together.d)} ${MONTHS[m]}`;
-  const open = left <= 0 || PREVIEW;
-  if (left > 0 && !nextLetter) nextLetter = dateText;
-
-  const b = document.createElement('button');
-  b.className = 'env' + (open ? ' open' : '');
-  b.innerHTML = `<b>${dateText}</b>${n === 12 ? '১ বছর' : bn(n) + ' মাস'}`;
-  b.addEventListener('click', () => {
-    letterBox.classList.add('show');
-    letterBox.classList.toggle('locked', !open);
-    if (open) {
-      letterBox.textContent = LETTERS[n] || LETTER_EMPTY;
-    } else {
-      letterBox.textContent = `এটা ${dateText} খুলবে। আর ${bn(left)} দিন।`;
-      b.classList.remove('nope');
-      void b.offsetWidth;
-      b.classList.add('nope');
-    }
-  });
-  $('#letters').appendChild(b);
-}
-if (PREVIEW) document.body.insertAdjacentHTML('beforeend', '<div class="preview-flag">preview: সব চিঠি খোলা</div>');
-
-// ---- ৫. আমার কথা ----
+// ---- ৪. আমার কথা ----
 $('#promise').textContent = PROMISE;
 
-// ---- ৬. শেষ প্রশ্ন ----
-$('#question').textContent = `${CONFIG.herName}, সামনের সব ১৬ তারিখ আমার সাথে কাটাবে?`;
-const hold = $('#hold');
-let raf = 0, t0 = 0, done = false;
-function tick(t) {
-  if (!t0) t0 = t;
-  const p = Math.min(1, (t - t0) / 1600);
-  hold.style.setProperty('--p', p);
-  if (p < 1) raf = requestAnimationFrame(tick);
-  else finish();
+// ---- ৫. শেষ প্রশ্ন ----
+const choices = $('#choices'), yes = $('#yes'), no = $('#no');
+let qi = 0, dodges = 0, lastDodge = 0, done = false;
+function ask() {
+  const q = $('#question');
+  q.textContent = QUESTIONS[qi];
+  if (qi) q.classList.add('swap');
+  no.style.left = no.style.top = '';
+  $('#noLine').textContent = '';
 }
-function begin(e) {
-  if (done) return;
+// "না" কে বাক্সের ভেতরে নতুন জায়গায় সরায়: "হ্যাঁ" এর ওপরে না, আঙুলের কাছেও না
+function dodge(px, py) {
+  if (done || Date.now() - lastDodge < 250) return;
+  lastDodge = Date.now();
+  const box = choices.getBoundingClientRect(), y = yes.getBoundingClientRect();
+  const w = no.offsetWidth, h = no.offsetHeight;
+  let left, top;
+  for (let i = 0; i < 40; i++) {
+    left = Math.random() * (box.width - w);
+    top = Math.random() * (box.height - h);
+    const onYes = left < y.right - box.left + 10 && left + w > y.left - box.left - 10 &&
+                  top < y.bottom - box.top + 10 && top + h > y.top - box.top - 10;
+    const near = px != null && Math.hypot(box.left + left + w / 2 - px, box.top + top + h / 2 - py) < 90;
+    if (!onYes && !near) break;
+  }
+  no.style.left = left + 'px';
+  no.style.top = top + 'px';
+  $('#noLine').textContent = NO_LINES[dodges++ % NO_LINES.length];
+}
+choices.addEventListener('pointermove', e => {
+  const r = no.getBoundingClientRect();
+  if (Math.hypot(r.left + r.width / 2 - e.clientX, r.top + r.height / 2 - e.clientY) < 75) dodge(e.clientX, e.clientY);
+});
+['pointerdown', 'click'].forEach(ev => no.addEventListener(ev, e => {
   e.preventDefault();
-  cancelAnimationFrame(raf);
-  t0 = 0;
-  raf = requestAnimationFrame(tick);
-}
-function cancel() {
+  dodge(e.clientX, e.clientY);
+}));
+no.addEventListener('focus', () => dodge());
+yes.addEventListener('click', () => {
   if (done) return;
-  cancelAnimationFrame(raf);
-  hold.style.setProperty('--p', 0);
-}
+  if (++qi < QUESTIONS.length) ask();
+  else finish();
+});
+ask();
 function finish() {
   done = true;
-  hold.classList.add('done');
-  $('#holdLabel').textContent = 'হ্যাঁ';
+  choices.classList.add('done');
+  $('#noLine').textContent = '';
   const sign = CONFIG.myName ? `<br>তোমার ${CONFIG.myName}` : '';
-  $('#answer').innerHTML = `তাহলে ঠিক হলো।<br>${nextLetter || 'পরের ১৬ তারিখে'} চিঠি নিয়ে আসছি।${sign}`;
+  $('#answer').innerHTML = `তাহলে ঠিক হলো।<br>না বলার রাস্তা এমনিতেও ছিল না।${sign}`;
   $('#answer').classList.add('show');
   const burst = $('#burst');
-  burst.style.top = hold.offsetTop + hold.offsetHeight / 2 + 'px';
+  burst.style.top = choices.offsetTop + 36 + 'px';
   for (let i = 0; i < 16; i++) {
     const h = document.createElement('i');
     const ang = (i / 16) * Math.PI * 2, far = 110 + Math.random() * 90;
@@ -654,11 +597,6 @@ function finish() {
     burst.appendChild(h);
   }
 }
-hold.addEventListener('pointerdown', begin);
-['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => hold.addEventListener(ev, cancel));
-hold.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) begin(e); });
-hold.addEventListener('keyup', cancel);
-hold.addEventListener('contextmenu', e => e.preventDefault());
 
 // ---- scroll এ ভেসে ওঠা ----
 const io = new IntersectionObserver(entries => {
